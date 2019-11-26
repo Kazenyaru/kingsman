@@ -1,5 +1,5 @@
 <div class="card" style="width: 18rem;margin: 25px">
-  <img src="<?=BASE_PATH?>/images/home/kingsman1.jpg" class="card-img-top" alt="ini baju">
+<img src="<?=BASE_PATH?>/images/<?= @$data['gambar'] ? 'designer/'.$data['gambar'] : 'home/kingsman1.jpg'?>" class="card-img-top" alt="<?=$data['nama_cat']?>">
   <div class="card-body">
     <h5 class="card-title"><?= ucfirst($cat[0]['nama_cat'])?></h5>
     <p class="card-text">Rp<?= $cat[0]['harga'] ?></p>

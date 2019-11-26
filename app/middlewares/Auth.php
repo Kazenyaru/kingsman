@@ -39,7 +39,7 @@ class Auth extends Middleware {
     }
   }
 
-  public function designerProtection($id) {
+  public static function designerProtection($id) {
     if ($id != $_SESSION['id_user'] || $_SESSION['role'] != 'admin') {
       return self::back();
     }

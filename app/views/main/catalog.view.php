@@ -148,7 +148,7 @@
         }
     ?>
         <div class="card" style="width: 18rem;margin: 25px">
-          <img src="<?=BASE_PATH?>/images/home/<?= @$data['gambar'] ? $data['gambar'].'.jpg' : 'kingsman1.jpg'?>" class="card-img-top" alt="<?=$data['nama_cat']?>">
+          <img src="<?=BASE_PATH?>/images/<?= @$data['gambar'] ? 'designer/'.$data['gambar'] : 'home/kingsman1.jpg'?>" class="card-img-top" alt="<?=$data['nama_cat']?>">
           <div class="card-body">
             <h5 class="card-title"><?= ucfirst($data['nama_cat'])?></h5>
             <p class="card-text">Rp<?= $data['harga'] ?></p>

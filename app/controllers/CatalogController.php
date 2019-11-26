@@ -84,17 +84,25 @@ class CatalogController extends MainController {
 
     Auth::designerProtection($id);
 
-    $namaFile = " ";
+    $namaFile = "";
 
-    if ($_FILES['gambar']) {
+    
+    if ($_FILES['gambar']['name']) {
       $namaFile = $_FILES['gambar']['name'];
       $namaSementara = $_FILES['gambar']['tmp_name'];
     
       // tentukan lokasi file akan dipindahkan
-      $dirUpload = ROOT."public/images/designer";
+      $dirUpload = ROOT."/public/images/designer/";
     
-      // pindahkan file
+      // pindahkan file=
       $terupload = move_uploaded_file($namaSementara, $dirUpload.$namaFile);
+
+      // return var_dump($terupload);
+
+      if (!$terupload) {
+        return $this->back();
+      }
+
     }
 
     $catalog = $this->catalog->find($id);
