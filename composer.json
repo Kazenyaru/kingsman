@@ -1,0 +1,19 @@
+{
+    "name": "fadillads/kingsman",
+    "description": "kingsman",
+    "authors": [
+        {
+            "name": "fadilmuh22",
+            "email": "fadilmuh2002@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "app\\": "app/",
+            "config\\": "config/",
+            "FadilArtisan\\": "library/core/",
+            "FadilArtisan\\helper\\": "library/helper/"
+        }
+    }
+}
