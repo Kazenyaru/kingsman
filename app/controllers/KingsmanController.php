@@ -15,9 +15,13 @@ class KingsmanController extends MainController {
     return $this->template('main/home');
   }
 
+  public function redirectCatalog() {
+    return $this->redirect('catalog/page/1');
+  }
+
   public function catalog(Request $request, $pagi = 1) {
     
-    $halaman = 5;
+    $halaman = 6;
 
     $page = $pagi ?$pagi : 1 ;
 
@@ -47,6 +51,10 @@ class KingsmanController extends MainController {
 
   public function contact() {
     return $this->template('main/contact');
+  }
+
+  public function cart() {
+    return $this->template('main/cart');
   }
 
 }

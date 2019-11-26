@@ -97,6 +97,8 @@ class Model {
 
       $query = $this->_dbh->query($sql);
 
+      // return var_dump($query);
+
       $data = array();
       while ($row = $query->fetch()) {
         array_push($data, $row);
@@ -121,7 +123,10 @@ class Model {
 
   public function data($data = array()) {
     $this->_data = "";
-    $this->validation($data);
+    if ($this->_val) {
+      $this->validation($data);
+    }
+    
     if ($this->_val_message) {
       return $this->_val_message;
     }
@@ -147,14 +152,15 @@ class Model {
   }
 
   public function find($id) {
-    $this->_primary = "id".$this->_table;
+    $this->_primary = $this->_primary ? $this->_primary : "id".$this->_table;
     $this->_where = " WHERE $this->_primary=$id";
     return $this;
   }
   
   public function update() {
     try {
-      $sql = "UPDATE ".$this->_table." SET ".$this->_data." ".$this->_condition;
+      $sql = "UPDATE ".$this->_table." SET".$this->_data." ".$this->_where;
+      // return var_dump($sql);
       return $this->_dbh->query($sql);
     } catch (\PDOException $error) {
       die ("Tidak dapat memperbarui data: ".$error->getMessage());
@@ -163,7 +169,7 @@ class Model {
 
   public function delete() {
     try {
-      $sql = "DELETE FROM ".$this->_table." ".$this->_condition;
+      $sql = "DELETE FROM ".$this->_table." ".$this->_where;
       return $this->_dbh->query($sql);
     } catch (\PDOException $error) {
       die("Tidak dapat menghapus data: " .$error.getMessage());

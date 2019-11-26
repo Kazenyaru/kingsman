@@ -25,6 +25,14 @@
                 <label for="inputPassword">Password</label>
               </div>
 
+              <div class="form-group">
+                <label for="role">Role</label>
+                <select class="form-control" name="role" id="role">
+                    <option value="user" selected>User</option>
+                    <option value="designer">Designer</option>
+                </select>
+              </div>
+
               <div class="custom-control custom-checkbox mb-3">
                 <input type="checkbox" class="custom-control-input" id="customCheck1">
                 <label class="custom-control-label" for="customCheck1">Remember password</label>

@@ -4,10 +4,26 @@ use FadilArtisan\Route;
 
 Route::get("", "KingsmanController@home");
 
-Route::get("catalog/{1}", "KingsmanController@catalog");
+Route::get("catalog", "KingsmanController@redirectCatalog");
+Route::get("catalog/page/{page}", "KingsmanController@catalog");
+
+Route::get("catalog/{id}", "CatalogController@get");
+
+Route::get("catalog/designer/{id}", "CatalogController@designer");
+
 Route::get("catalog/tambah", "CatalogController@tambah");
 
+Route::post("catalog/create", "CatalogController@create");
+
+Route::get("catalog/edit/{id}", "CatalogController@edit");
+
+Route::post("catalog/update/{id}", "CatalogController@update");
+
+Route::get("catalog/delete/{id}", "CatalogController@delete");
+
 Route::get("contact", "KingsmanController@contact");
+
+Route::get("cart", "KingsmanController@cart");
 
 Route::get("login", "AuthController@login");
 Route::get("register", "AuthController@register");

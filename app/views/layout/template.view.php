@@ -6,10 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Kingsman</title>
-  
+
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-  <link rel="stylesheet" href="<?=BASE_PATH?>/css/index.css">
+  <link rel="stylesheet" href="<?= BASE_PATH ?>/css/index.css">
 
   <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -21,52 +22,55 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
     <div class="container">
-      <a class="navbar-brand nav-atas" href="<?=BASE_PATH?>/">Kingsman</a>
+      <a class="navbar-brand nav-atas" href="<?= BASE_PATH ?>/">Kingsman</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <i class="fas fa-bars"></i>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-              <a class="nav-link active" href="<?=BASE_PATH?>">Home</a>
+            <a class="nav-link active" href="<?= BASE_PATH ?>">Home</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="<?=BASE_PATH?>/catalog/1">Catalog</a>
+            <a class="nav-link" href="<?= BASE_PATH ?>/catalog/page/1">Catalog</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="<?=BASE_PATH?>/contact">Contact Us</a>
+            <a class="nav-link" href="<?= BASE_PATH ?>/contact">Contact Us</a>
           </li>
-          <?php if(@$_SESSION['role']) { ?>
+          <?php if (@$_SESSION['role']) { ?>
+            <li class="nav-item">
+              <a class="nav-link" href="<?= BASE_PATH ?>/cart">My Cart</a>
+            </li>
+          <?php } ?>
+          <?php if ( empty(@$_SESSION['role']) ) { ?>
           <li class="nav-item">
-              <a class="nav-link" href="<?=BASE_PATH?>/cart">My Cart</a>
+            <a class="nav-link" href="<?= BASE_PATH ?>/login">Login/Register</a>
           </li>
           <?php } ?>
-          <li class="nav-item">
-              <a class="nav-link" href="<?=BASE_PATH?>/login">Login/Register</a>
-          </li>
-
-          <?php if(@$_SESSION['email']) { ?>
-          <li class="nav-item dropdown">
-            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+          
+          <?php if (@$_SESSION['email']) { ?>
+            <li class="nav-item dropdown">
+              <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                 <?= @ucfirst(explode('@', $_SESSION['email'])[0]) ?> <span class="caret"></span>
-            </a>
+              </a>
 
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="<?= BASE_PATH ?>"
-                    onclick="event.preventDefault();
-                                  document.getElementById('logout-form').submit();">
-                    Logout
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="<?= BASE_PATH ?>" onclick="event.preventDefault();
+                                      document.getElementById('logout-form').submit();">
+                  Logout
                 </a>
 
-                <form id="logout-form" action="<?=BASE_PATH?>/auth/logout" method="POST" style="display: none;">
-                    
-                </form>
-            </div>
+                <form id="logout-form" action="<?= BASE_PATH ?>/auth/logout" method="POST" style="display: none;">
 
-          </li>
+                </form>
+              </div>
+
+            </li>
           <?php } ?>
 
         </ul>
+
+
       </div>
     </div>
   </nav>
@@ -74,12 +78,12 @@
   <main class="mt-2">
     <div class="container">
       <div class="container">
-<?php
-  $view = new FadilArtisan\View($viewName);
-  // return var_dump($data);
-  $view->bindData($data);
-  $view->render();
-?>
+        <?php
+        $view = new FadilArtisan\View($viewName);
+        // return var_dump($data);
+        $view->bindData($data);
+        $view->render();
+        ?>
       </div>
     </div>
   </main>

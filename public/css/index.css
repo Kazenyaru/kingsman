@@ -109,5 +109,10 @@ li a:hover:not(.active) {
     font-family: 'Segoe Print';
     float: right;
     margin-right: 40px;
-    
+}
+
+.granted {
+    display: block;
+    float: left;
+    width: 100%;
 }

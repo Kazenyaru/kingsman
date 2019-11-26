@@ -11,7 +11,7 @@ class Auth extends Middleware {
 
   public static function auth() {
     // return var_dump(Session::get('email'));
-    if ( empty( Session::get('email') ) ) {
+    if ( empty(Session::get('email')) ) {
       self::redirect('/login');
     }
   }
@@ -23,7 +23,26 @@ class Auth extends Middleware {
   }
   
   public static function admin() {
+    if ( Session::get('role') != 'admin' ) {
+      self::back();
+    }
+  }
 
+  public static function designer() {
+    if (Session::get('role')) {
+      if ( Session::get('role') == 'user' ) {
+        return self::back();
+      }
+      return;
+    } else {
+      return self::back();
+    }
+  }
+
+  public function designerProtection($id) {
+    if ($id != $_SESSION['id_user'] || $_SESSION['role'] != 'admin') {
+      return self::back();
+    }
   }
 
 }

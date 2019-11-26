@@ -38,6 +38,7 @@ class AuthController extends MainController {
       if ( password_verify( $password, $data[0]['password'] ) ) {
         $_SESSION["email"] = $data[0]["email"];
         $_SESSION["role"] = $data[0]["role"];
+        $_SESSION['id_user'] = $data[0]["id_user"];
         $this->redirect('');
       } else {
         $this->template('auth/login', array(
@@ -71,7 +72,8 @@ class AuthController extends MainController {
     
     $iniUser = $this->user->data([
       'email' => $email,
-      'password' => $password
+      'password' => $password,
+      'role' => $request->role
     ]);
       
     return var_dump($this->user->getValMessage());

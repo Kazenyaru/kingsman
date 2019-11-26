@@ -13,9 +13,114 @@
     padding: 20px 0;
     font-size: 30px;
   }
+
+  .cat-act {
+    text-decoration: none;
+    color: white;
+  }
+
 </style>
 <br>
 <h4 class="head">Catalog Kingsman</h4>
+
+<?php if( @$_SESSION['role'] == 'admin' ) {?>
+  <h5>
+    <span>
+      <a class="badge badge-primary" href="<?=BASE_PATH?>/catalog/designer/<?=$_SESSION['id_user']?>">My Catalog</a>
+    </span>
+    <span>
+      <a class="badge badge-secondary" href="<?=BASE_PATH?>/catalog/tambah">Tambah Catalog</a>
+    </span>
+
+    <?php if ( @$fadil && (@$_SESSION['id_user'] == @$id || @$_SESSION['role'] == 'admin') ) { ?>
+      <span>
+        <li class="nav-item dropdown badge badge-success">
+          <a id="navbarDropdown" class="dropdown-toggle cat-act" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+            Edit <span class="caret"></span>
+          </a>
+
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <?php foreach($fadil as $cat) { ?>
+              <a class="dropdown-item" href="<?= BASE_PATH ?>/catalog/edit/<?=$cat['id_cat']?>">
+                <?=$cat['id_cat']?>. <?=$cat['nama_cat']?>
+              </a> 
+            <?php } ?>       
+          </div>
+
+        </li>
+
+      </span>
+
+      <span>
+        <li class="nav-item dropdown badge badge-danger">
+          <a id="navbarDropdown" class="dropdown-toggle cat-act" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+            Delete <span class="caret"></span>
+          </a>
+
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <?php foreach($fadil as $cat) { ?>
+              <a class="dropdown-item" href="<?= BASE_PATH ?>/catalog/edit/<?=$cat['id_cat']?>">
+                <?=$cat['id_cat']?>. <?=$cat['nama_cat']?>
+              </a> 
+            <?php } ?>       
+          </div>
+
+        </li>
+      </span>
+    <?php } ?>
+
+  </h5>
+<?php } ?>
+
+<?php if( @$email && @$_SESSION['role'] && @$_SESSION['role'] != 'user' ) {?>
+  <h5>
+    <span>
+      <a class="badge badge-primary" href="<?=BASE_PATH?>/catalog/designer/<?=$_SESSION['id_user']?>">My Catalog</a>
+    </span>
+    <span>
+      <a class="badge badge-secondary" href="<?=BASE_PATH?>/catalog/tambah">Tambah Catalog</a>
+    </span>
+
+    <?php if ( @$fadil && (@$_SESSION['id_user'] == @$id || @$_SESSION['role'] == 'admin') ) { ?>
+      <span>
+        <li class="nav-item dropdown badge badge-success">
+          <a id="navbarDropdown" class="dropdown-toggle cat-act" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+            Edit <span class="caret"></span>
+          </a>
+
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <?php foreach($fadil as $cat) { ?>
+              <a class="dropdown-item" href="<?= BASE_PATH ?>/catalog/edit/<?=$cat['id_cat']?>">
+                <?=$cat['id_cat']?>. <?=$cat['nama_cat']?>
+              </a> 
+            <?php } ?>       
+          </div>
+
+        </li>
+
+      </span>
+
+      <span>
+        <li class="nav-item dropdown badge badge-danger">
+          <a id="navbarDropdown" class="dropdown-toggle cat-act" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+            Delete <span class="caret"></span>
+          </a>
+
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <?php foreach($fadil as $cat) { ?>
+              <a class="dropdown-item" href="<?= BASE_PATH ?>/catalog/edit/<?=$cat['id_cat']?>">
+                <?=$cat['id_cat']?>. <?=$cat['nama_cat']?>
+              </a> 
+            <?php } ?>       
+          </div>
+
+        </li>
+      </span>
+    <?php } ?>
+
+  </h5>
+<?php } ?>
+
 <div class="container">
   <div class="justify-content-md-center">
     <!-- <?php /*
@@ -43,13 +148,13 @@
         }
     ?>
         <div class="card" style="width: 18rem;margin: 25px">
-          <img src="<?=BASE_PATH?>/images/home/kingsman1.jpg" class="card-img-top" alt="ini baju">
+          <img src="<?=BASE_PATH?>/images/home/<?= @$data['gambar'] ? $data['gambar'].'.jpg' : 'kingsman1.jpg'?>" class="card-img-top" alt="<?=$data['nama_cat']?>">
           <div class="card-body">
             <h5 class="card-title"><?= ucfirst($data['nama_cat'])?></h5>
             <p class="card-text">Rp<?= $data['harga'] ?></p>
             <p class="card-text"><?= strtoupper($data['ukuran']) ?></p>
             <p class="card-text"><?= $data['tahun'] ?></p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <a href="<?=BASE_PATH?>/catalog/<?=$data['id_cat']?>" class="btn btn-primary">Details</a>
           </div>
         </div>
         <?php }
@@ -62,7 +167,7 @@
     if(@$paginate)
       for ($i=1; $i <= $paginate ; $i++){ ?>
         <a href="<?php echo $i; ?>"><?php echo $i; ?></a>
- <?php } ?>
+  <?php } ?>
     
 
     <!-- <table class="table table-striped mt-4">
