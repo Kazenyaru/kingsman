@@ -23,13 +23,17 @@
   <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
     <div class="container">
       <a class="navbar-brand nav-atas" href="<?= BASE_PATH ?>/">Kingsman</a>
+      <div class="active-cyan-4 ml-5 row">
+        <input class="form-control col" id="searchInput" type="text" placeholder="Nama Catalog" aria-label="Search">
+        <a class="btn btn-primary-small col" id="searchBtn" href="<?= BASE_PATH ?>/catalog">Search</a>
+      </div>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <i class="fas fa-bars"></i>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link active" href="<?= BASE_PATH ?>">Home</a>
+            <a class="nav-link" href="<?= BASE_PATH ?>">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<?= BASE_PATH ?>/catalog/page/1">Catalog</a>
@@ -37,11 +41,6 @@
           <li class="nav-item">
             <a class="nav-link" href="<?= BASE_PATH ?>/contact">Contact Us</a>
           </li>
-          <?php if (@$_SESSION['role']) { ?>
-            <li class="nav-item">
-              <a class="nav-link" href="<?= BASE_PATH ?>/cart">My Cart</a>
-            </li>
-          <?php } ?>
           <?php if ( empty(@$_SESSION['role']) ) { ?>
           <li class="nav-item">
             <a class="nav-link" href="<?= BASE_PATH ?>/login">Login/Register</a>
@@ -103,6 +102,14 @@
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+  <script>
+    let input = document.getElementById("searchInput");
+    input.addEventListener('input', function(evt) {
+      let search = document.getElementById("searchBtn").setAttribute('href', "<?=BASE_PATH?>/catalog/page/"+this.value);
+    });
+  </script>
+
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 </body>

@@ -13,7 +13,9 @@ class CatalogController extends MainController {
   }
 
   public function get(Request $request ,$id) {
-    $catalog = $this->catalog->select()->find($id)->get();
+    $catalog = $this->catalog->select()->join('user', array(
+      "catalog_kingsman.designer" => "user.id_user" 
+    ))->find($id)->get();
 
     return $this->template('catalog/show-catalog', ['cat' => $catalog]);
   }
@@ -72,9 +74,9 @@ class CatalogController extends MainController {
   public function edit(Request $request, $id) {
     Auth::designer();
 
-    Auth::designerProtection($id);
-    
-    $catalog = $this->catalog->select()->find($id)->get();
+    $catalog = $this->catalog->select()->find($id)->limit(1)->get();
+
+    Auth::designerProtection($catalog[0]['designer']);
 
     return $this->template('catalog/edit-catalog', ['cat' => $catalog]);
   }

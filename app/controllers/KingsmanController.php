@@ -20,6 +20,12 @@ class KingsmanController extends MainController {
   }
 
   public function catalog(Request $request, $pagi = 1) {
+
+    $cat = [];
+
+    if (preg_match("/[a-z]/i", $pagi)) {
+      $this->search($pagi);
+    }
     
     $halaman = 6;
 
@@ -45,6 +51,19 @@ class KingsmanController extends MainController {
     return $this->template('main/catalog', [ 'fadil' => $cat, 'paginate' => $pages ]);
   }
 
+  public function search($str = "") {
+    $cat = [];
+    
+    $cat = $this->catalog->select([ "catalog_kingsman.*","user.email" ])->join('user', array(
+      "catalog_kingsman.designer" => "user.id_user" 
+    ))->where([["catalog_kingsman.nama_cat", "like", "'%$str%'"]])->get();
+      
+    // return var_dump($jumlah);
+
+    // return var_dump($cat);
+    return $this->template('main/catalog', [ 'fadil' => $cat, 'paginate' => 1]);
+  }
+
   public function about() {
     return $this->template('main/about');
   }
@@ -53,8 +72,8 @@ class KingsmanController extends MainController {
     return $this->template('main/contact');
   }
 
-  public function cart() {
-    return $this->template('main/cart');
+  public function error() {
+    return $this->view('main/notfound');
   }
 
 }

@@ -13,7 +13,7 @@
     </div>
     <div class="form-group">
         <label for="formGroupExampleInput2">Harga</label>
-        <input type="number" class="form-control" name="harga" id="harga" value="<?=$cat[0]['harga']?>" placeholder="Harga">
+        <input type="number" class="form-control" name="harga" id="harga" value="<?= number_format($cat[0]['harga']) ?>" placeholder="Harga">
     </div>
     <div class="form-group">
         <label for="formGroupExampleInput2">Ukuran</label>
@@ -31,7 +31,7 @@
         <input type="number" class="form-control" name="tahun" id="tahun" value="<?=$cat[0]['tahun']?>" placeholder="Tahun" min="1999" max="2999">
     </div>
 
-    <input type="hidden" name="designer" value="1">
+    <input type="hidden" name="designer" value="<?=$_SESSION['id_user']?>">
 
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

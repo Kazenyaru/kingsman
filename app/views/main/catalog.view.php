@@ -59,7 +59,7 @@
 
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             <?php foreach($fadil as $cat) { ?>
-              <a class="dropdown-item" href="<?= BASE_PATH ?>/catalog/edit/<?=$cat['id_cat']?>">
+              <a class="dropdown-item" href="<?= BASE_PATH ?>/catalog/delete/<?=$cat['id_cat']?>">
                 <?=$cat['id_cat']?>. <?=$cat['nama_cat']?>
               </a> 
             <?php } ?>       
@@ -108,7 +108,7 @@
 
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             <?php foreach($fadil as $cat) { ?>
-              <a class="dropdown-item" href="<?= BASE_PATH ?>/catalog/edit/<?=$cat['id_cat']?>">
+              <a class="dropdown-item" href="<?= BASE_PATH ?>/catalog/delete/<?=$cat['id_cat']?>">
                 <?=$cat['id_cat']?>. <?=$cat['nama_cat']?>
               </a> 
             <?php } ?>       
@@ -149,12 +149,14 @@
     ?>
         <div class="card" style="width: 18rem;margin: 25px">
           <img src="<?=BASE_PATH?>/images/<?= @$data['gambar'] ? 'designer/'.$data['gambar'] : 'home/kingsman1.jpg'?>" class="card-img-top" alt="<?=$data['nama_cat']?>">
-          <div class="card-body">
-            <h5 class="card-title"><?= ucfirst($data['nama_cat'])?></h5>
-            <p class="card-text">Rp<?= $data['harga'] ?></p>
-            <p class="card-text"><?= strtoupper($data['ukuran']) ?></p>
-            <p class="card-text"><?= $data['tahun'] ?></p>
-            <a href="<?=BASE_PATH?>/catalog/<?=$data['id_cat']?>" class="btn btn-primary">Details</a>
+          <div class="card-body col mr-1 ml-1">
+            <div class="row">
+              <h5 class="card-title col"><?= ucfirst($data['nama_cat'])?></h5>
+              <p class="card-text col" style="text-align: right;margin-right: 15px;"><?= strtoupper($data['ukuran']) ?></p>
+            </div>
+            <p class="card-text col badge badge-secondary">Rp<?= number_format($data['harga'], 2, ",", ".") ?></p>
+            <p class="card-text col badge badge-secondary"><?= $data['tahun'] ?></p>
+            <a href="<?=BASE_PATH?>/catalog/<?=$data['id_cat']?>" class="btn btn-primary col">Details</a>
           </div>
         </div>
         <?php }

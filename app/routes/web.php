@@ -35,6 +35,6 @@ Route::post("auth/create", "AuthController@create");
 Route::get("auth/user", "AuthController@get");
 Route::get("auth/user/{id}", "AuthController@get");
 
-Route::error("ErrorController@index");
+Route::error("KingsmanController@error");
 
 // return var_dump(Route::$_post);

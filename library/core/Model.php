@@ -48,7 +48,7 @@ class Model {
   public function where($condition = '') {
     $this->_where = '';
     if(is_array($condition)) {
-      $this->_where .= " WHERE";
+      $this->_where .= "WHERE";
       foreach($condition as $cond) {
         if(is_array($cond)) {
           $this->_where .= " $cond[0] $cond[1] $cond[2] AND";
@@ -69,7 +69,7 @@ class Model {
   }
 
   public function limit($val1, $val2 = 0) {
-    if ($val2 == 0) $this->_limit = " LIMIT $val1";
+    if ($val2 == 0) $this->_limit = "LIMIT $val1";
     else $this->_limit = " LIMIT $val1,$val2";
     return $this;
   }
@@ -94,10 +94,10 @@ class Model {
     try {
       if ($this->_sql == null) $sql = $this->_select." ".$this->_join." ".$this->_where." ".$this->_order." ".$this->_limit;
       else $sql = $this->_sql;
-
+      
+      // return var_dump($sql);
       $query = $this->_dbh->query($sql);
 
-      // return var_dump($query);
 
       $data = array();
       while ($row = $query->fetch()) {
@@ -202,6 +202,12 @@ class Model {
   public function validating($dataKey, $rules, $data) {
     // return var_dump("ini rulenya", $data);
     switch($rules) {
+      case 'required':
+        if (empty($data)) {
+          $this->_val_message = "Data is required";
+          return $this;
+        }
+      break;
       case "string":
         if (!\is_string($data)) {
           $this->_val_message = "Data must be a string";
