@@ -26,8 +26,8 @@ class CatalogController extends MainController {
     ))->where(["catalog_kingsman.designer", "=", "$id"])->get();
 
     return $this->template('main/catalog', [
-      'fadil' => $catalog, 
-      'email' => $catalog[0]['email'],
+      'fadil' => @$catalog, 
+      'email' => @$catalog[0]['email'],
       'id' => $id
     ]);
 

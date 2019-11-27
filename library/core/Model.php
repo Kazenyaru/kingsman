@@ -123,13 +123,6 @@ class Model {
 
   public function data($data = array()) {
     $this->_data = "";
-    if ($this->_val) {
-      $this->validation($data);
-    }
-    
-    if ($this->_val_message) {
-      return $this->_val_message;
-    }
     foreach ($data as $key=>$val) {
       $this->_data .= " $key='$val',";
     }

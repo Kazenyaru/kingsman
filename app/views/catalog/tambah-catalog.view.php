@@ -30,6 +30,6 @@
         <label for="formGroupExampleInput2">Tahun</label>
         <input type="number" class="form-control" name="tahun" id="formGroupExampleInput2" placeholder="Tahun" min="1999" max="2999">
     </div>
-    <input type="hidden" name="designer" value="1">
+    <input type="hidden" name="designer" value="@<?=$_SESSION['id_user']?>">
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

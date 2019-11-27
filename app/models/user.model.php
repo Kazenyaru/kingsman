@@ -11,7 +11,8 @@ class UserModel extends Model {
 
     $this->validator([
       "password" => "min:8",
-      "email" => "email|unique:email"
+      "email" => "email|unique:email",
+      "role" => ""
     ]);
 
     // return var_dump($this->_val);

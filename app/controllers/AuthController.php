@@ -70,13 +70,13 @@ class AuthController extends MainController {
     $password = $this->validate($request->password);
 
     
-    $iniUser = $this->user->data([
+    $iniUser = $this->user->validation([
       'email' => $email,
       'password' => $password,
       'role' => $request->role
     ]);
       
-    return var_dump($this->user->getValMessage());
+    // return var_dump($this->user->getValMessage());
     if ($this->user->getValMessage()) {
       return $this->template('auth/login', array(
         "msg" => array("danger", $this->user->getValMessage())
@@ -87,7 +87,8 @@ class AuthController extends MainController {
 
     $iniUser = $this->user->data([
       'email' => $email,
-      'password' => $password
+      'password' => $password,
+      'role' => $request->role
     ]);
 
     // return var_dump($this->user->getValMessage());

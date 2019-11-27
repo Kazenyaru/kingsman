@@ -23,7 +23,7 @@
 <br>
 <h4 class="head">Catalog Kingsman</h4>
 
-<?php if( @$_SESSION['role'] == 'admin' ) {?>
+<?php if( !@$email && @$_SESSION['role'] == 'admin' ) {?>
   <h5>
     <span>
       <a class="badge badge-primary" href="<?=BASE_PATH?>/catalog/designer/<?=$_SESSION['id_user']?>">My Catalog</a>
@@ -72,7 +72,7 @@
   </h5>
 <?php } ?>
 
-<?php if( @$email && @$_SESSION['role'] && @$_SESSION['role'] != 'user' ) {?>
+<?php if( @$_SESSION['role'] && @$_SESSION['role'] != 'admin' ) {?>
   <h5>
     <span>
       <a class="badge badge-primary" href="<?=BASE_PATH?>/catalog/designer/<?=$_SESSION['id_user']?>">My Catalog</a>
