@@ -77,5 +77,3 @@ class KingsmanController extends MainController {
   }
 
 }
-
-$king  = new KingsmanController();

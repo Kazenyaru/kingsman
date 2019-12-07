@@ -124,6 +124,7 @@ class Model {
   public function data($data = array()) {
     $this->_data = "";
     foreach ($data as $key=>$val) {
+      if ($val == null) continue;
       $this->_data .= " $key='$val',";
     }
     $this->_data = substr($this->_data, 0, -1);
