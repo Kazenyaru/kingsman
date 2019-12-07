@@ -1,3 +1,4 @@
+create database `kingsman`;
 use `kingsman`;
 create table `catalog_kingsman` (
   id_cat bigint(20) primary key not null,

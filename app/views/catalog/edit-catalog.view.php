@@ -13,7 +13,7 @@
     </div>
     <div class="form-group">
         <label for="formGroupExampleInput2">Harga</label>
-        <input type="number" class="form-control" name="harga" id="harga" value="<?= number_format($cat[0]['harga']) ?>" placeholder="Harga">
+        <input type="number" class="form-control" name="harga" id="harga" value="<?= $cat[0]['harga'] ?>" placeholder="Harga">
     </div>
     <div class="form-group">
         <label for="formGroupExampleInput2">Ukuran</label>

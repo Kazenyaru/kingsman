@@ -14,8 +14,8 @@ class CatalogController extends MainController {
 
   public function get(Request $request ,$id) {
     $catalog = $this->catalog->select()->join('user', array(
-      "catalog_kingsman.designer" => "user.id_user" 
-    ))->find($id)->get();
+      "catalog_kingsman.designer" => "user.id_user AND catalog_kingsman.designer IS NOT NULL" 
+    ), "LEFT JOIN")->find($id)->get();
 
     return $this->template('catalog/show-catalog', ['cat' => $catalog]);
   }
@@ -36,6 +36,7 @@ class CatalogController extends MainController {
   }
 
   public function tambah() {
+    Auth::designer();
     return $this->template('catalog/tambah-catalog');
   }
 
@@ -49,7 +50,7 @@ class CatalogController extends MainController {
       $namaSementara = $_FILES['gambar']['tmp_name'];
     
       // tentukan lokasi file akan dipindahkan
-      $dirUpload = ROOT."public/images/designer";
+      $dirUpload = ROOT."public/images/designer/";
     
       // pindahkan file
       $terupload = move_uploaded_file($namaSementara, $dirUpload.$namaFile);

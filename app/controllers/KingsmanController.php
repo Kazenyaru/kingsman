@@ -36,12 +36,12 @@ class KingsmanController extends MainController {
     $mulai = ($page>1) ? ($page * $halaman) - $halaman : 0;
 
     $jumlah = $this->catalog->select([ "catalog_kingsman.*","user.email" ])->join('user', array(
-      "catalog_kingsman.designer" => "user.id_user" 
-    ))->count();
+      "catalog_kingsman.designer" => "user.id_user AND catalog_kingsman.designer IS NOT NULL" 
+    ), "LEFT JOIN")->count();
     
     $cat = $this->catalog->select([ "catalog_kingsman.*","user.email" ])->join('user', array(
-      "catalog_kingsman.designer" => "user.id_user" 
-    ))->limit($mulai,$halaman)->get();
+      "catalog_kingsman.designer" => "user.id_user AND catalog_kingsman.designer IS NOT NULL" 
+    ), "LEFT JOIN")->limit($mulai,$halaman)->get();
       
       // return var_dump($jumlah);
 
@@ -55,8 +55,8 @@ class KingsmanController extends MainController {
     $cat = [];
     
     $cat = $this->catalog->select([ "catalog_kingsman.*","user.email" ])->join('user', array(
-      "catalog_kingsman.designer" => "user.id_user" 
-    ))->where([["catalog_kingsman.nama_cat", "like", "'%$str%'"]])->get();
+      "catalog_kingsman.designer" => "user.id_user AND catalog_kingsman.designer IS NOT NULL" 
+    ), "LEFT JOIN")->where([["catalog_kingsman.nama_cat", "like", "'%$str%'"]])->get();
       
     // return var_dump($jumlah);
 
