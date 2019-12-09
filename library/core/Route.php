@@ -83,10 +83,6 @@ class Route {
         $uriParsed = self::parseUrl($route);
 
         self::$request = new Request($_GET);
-        
-        // return var_dump($uriParsed);
-        // return var_dump(self::$_get);
-
         if ( isset(self::$_get[$route] ) ) {
           
           return self::dispatch( self::$_get[$route] );
@@ -94,7 +90,6 @@ class Route {
         } elseif ( isset(self::$_get[$uriParsed[0]]) ) {
           if ( is_array(self::$_get[$uriParsed[0]]) ) {
             $controller = self::$_get[$uriParsed[0]][0];
-            // return var_dump("this called two", $uriParsed[1]);
             return self::dispatch( $controller, $uriParsed[1] );
           }
           return self::dispatch( $controller );
@@ -111,17 +106,11 @@ class Route {
         $uriParsed = self::parseUrl($route);
 
         self::$request = new Request($_POST);
-        // return var_dump($_POST)
 
-        // return var_dump($request);
-        
-        // return var_dump($uriParsed);
-        // return var_dump(self::$_get);
 
         if ( isset(self::$_post[$route]) ) {
           self::dispatch( self::$_post[$route] );
         } elseif ( isset(self::$_post[$uriParsed[0]]) ) {
-          // return var_dump("this called two", self::$_post[$uriParsed[0]]);
           if ( is_array(self::$_post[$uriParsed[0]]) ) {
             $controller = self::$_post[$uriParsed[0]][0];
             return self::dispatch( $controller, $uriParsed[1] );
@@ -137,18 +126,14 @@ class Route {
       case "PUT":
         $uriParsed = self::parseUrl($route);
 
-        parse_str(file_get_contents('php://input'), $_PUT);
-        // return var_dump($_PUT);
+        $_PUT = "";
         
         self::$request = new Request($_PUT);
         
-        // return var_dump($uriParsed);
-        // return var_dump(self::$_put);
 
         if ( isset(self::$_put[$route]) ) {
           self::dispatch( self::$_put[$route] );
         } elseif ( isset(self::$_put[$uriParsed[0]]) ) {
-          // return var_dump("this called two", self::$_put[$uriParsed[0]]);
           if ( is_array(self::$_put[$uriParsed[0]]) ) {
             $controller = self::$_put[$uriParsed[0]][0];
             return self::dispatch( $controller, $uriParsed[1] );
@@ -164,12 +149,9 @@ class Route {
       case "PATCH":
         $uriParsed = self::parseUrl($route);
 
-        parse_str(file_get_contents('php://input'), $_PATCH);
+        $_PATCH = "";
         
         self::$request = new Request($_PATCH);
-        
-        // return var_dump($uriParsed);
-        // return var_dump(self::$_patch);
 
         if ( isset(self::$_patch[$route]) ) {
           self::dispatch( self::$_patch[$route] );
@@ -190,12 +172,9 @@ class Route {
       case "DELETE":
         $uriParsed = self::parseUrl($route);
 
-        parse_str(file_get_contents('php://input'), $_DELETE);
+        $_DELETE = "";
         
         self::$request = new Request($_DELETE);
-        
-        // return var_dump($uriParsed);
-        // return var_dump(self::$_delete);
 
         if ( isset(self::$_delete[$route]) ) {
           self::dispatch( self::$_delete[$route] );
@@ -246,15 +225,8 @@ class Route {
 
     if ( method_exists(self::$errorController[0], self::$errorController[1]) ) {
 
-      $object = new self::$errorController[0];
-
-      call_user_func_array(
-        array(
-          $object,
-          self::$errorController[1]
-        ),
-        array($msg)
-      );
+      $method = self::$errorController[1];
+      self::$errorController[0]::$method();
 
     } else die("$msg not found and error controller not found");
 
@@ -275,14 +247,8 @@ class Route {
 
     $newRoute = implode( "/", $routes )."/";
 
-    // return var_dump("ini fadil", isset(self::$_get[$newRoute]));
-
     return array($newRoute, $param);
 
   }
-
-  // public function test() {
-    // return var_dump($_get, $_post, $_put, $_patch, $_delete);
-  // }
 
 }

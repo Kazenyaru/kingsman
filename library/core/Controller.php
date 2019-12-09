@@ -25,8 +25,9 @@ class Controller {
     echo '<script>history.go(-1)</script>';
   }
 
-  public function redirect($url = '') {
-    header('location: '.BASE_PATH.DS.$url);
+  public function redirect($url = '', $absPath = false) {
+    if ($absPath) header('location: '.$url);
+    else header('location: '.BASE_PATH.DS.$url);
   }
 
   public function validate($data) {

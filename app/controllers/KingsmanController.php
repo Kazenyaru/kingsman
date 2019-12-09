@@ -15,10 +15,6 @@ class KingsmanController extends MainController {
     return $this->template('main/home');
   }
 
-  public function redirectCatalog() {
-    return $this->redirect('catalog/page/1');
-  }
-
   public function catalog(Request $request, $pagi = 1) {
 
     $cat = [];
@@ -57,10 +53,7 @@ class KingsmanController extends MainController {
     $cat = $this->catalog->select([ "catalog_kingsman.*","user.email" ])->join('user', array(
       "catalog_kingsman.designer" => "user.id_user AND catalog_kingsman.designer IS NOT NULL" 
     ), "LEFT JOIN")->where([["catalog_kingsman.nama_cat", "like", "'%$str%'"]])->get();
-      
-    // return var_dump($jumlah);
 
-    // return var_dump($cat);
     return $this->template('main/catalog', [ 'fadil' => $cat, 'paginate' => 1]);
   }
 
@@ -72,8 +65,12 @@ class KingsmanController extends MainController {
     return $this->template('main/contact');
   }
 
-  public function error() {
-    return $this->view('main/notfound');
+  /**
+   @supress('Deprecated')
+   @ini kok geli 
+  */
+  public static function error() {
+    return (new self)->view('main/notfound');
   }
 
 }

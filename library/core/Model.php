@@ -147,7 +147,7 @@ class Model {
 
   public function find($id) {
     $this->_primary = $this->_primary ? $this->_primary : "id".$this->_table;
-    $this->_where = " WHERE $this->_primary=$id";
+    $this->_where = " WHERE $this->_primary='$id'";
     return $this;
   }
   

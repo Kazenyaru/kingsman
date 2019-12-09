@@ -4,11 +4,21 @@ namespace FadilArtisan;
 
 class Request {
   
-  public function __construct($datas = array()) {
-    $header = apache_request_headers();
-    $datas = array_merge_recursive($header, $datas);
+  public function __construct( $datas ) {
 
-    foreach($datas as $key => $value) {
+    $header = apache_request_headers();
+
+    $head = "header";
+
+    $this->$head = $header;
+
+    if ($header["Content-Type"] ==  "application/json") {
+
+      $datas = json_decode( file_get_contents('php://input'), true );
+
+    }
+
+    foreach ($datas as $key => $value) {
       $this->$key = $value;
     }
 
