@@ -15,10 +15,6 @@ class MainController extends Controller {
     $view = $this->view('layout/template');
     $view->views($viewName);
     $view->bind('data', $datas);
-    // return var_dump();
-    // foreach ($datas as $key=>$value) {
-    //   $view->bind($key, $value);
-    // }
   }
 
 }

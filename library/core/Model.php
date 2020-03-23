@@ -203,18 +203,21 @@ class Model {
   public function validating($dataKey, $rules, $data) {
     // return var_dump("ini rulenya", $data);
     switch($rules) {
+
       case 'required':
         if (empty($data)) {
           $this->_val_message = "Data is required";
           return $this;
         }
       break;
+
       case "string":
         if (!\is_string($data)) {
           $this->_val_message = "Data must be a string";
           return $this;
         }
       break;
+
       case "number":
         if (!\is_numeric($data)) {
           // return var_dump("etst");
@@ -222,17 +225,20 @@ class Model {
           return $this;
         }
       break;
+
       case "bool":
         if (!\is_bool($data)) {
           $this->_val_message = "Data must be a boolean";
           return $this;
         }
       break;
+
       case "email":
         // return var_dump("test");
         $regex = '/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/'; 
         $this->_val_message = (preg_match($regex, $data))?"":"invalid email";
       break;
+
       case "max":
         $len = strlen($data);
         if ($len < $this->_val[$rules]) {
@@ -240,6 +246,7 @@ class Model {
           return $this;
         }
       break;
+
       case "min":
         $len = strlen($data);
         $min = $this->_val[$dataKey][$rules];
@@ -249,6 +256,7 @@ class Model {
           return $this;
         }
       break;
+
       case "unique":
         $jml = $this
           ->query("SELECT ".$dataKey." FROM ".$this->_table." WHERE ".$dataKey." ='".$data."'")
@@ -259,6 +267,7 @@ class Model {
           return $this;
         }
       break;
+      
     }
   }
 

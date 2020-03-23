@@ -18,10 +18,19 @@ class RedirectController extends Controller {
     return $this->redirect('catalog/page/1');
   }
 
+  /**
+   @req_body => optional(name as id_url) & (url)
+  */
   public function createRedirect(Request $request) {
 
+    $id_redir = Data::generateRandomString(4);
+
+    if (@$request->name) {
+      $id_redir = $request->name;
+    }
+
     $redir = $this->redirects->data([
-      "id_redir" => Data:: generateRandomString(4),
+      "id_redir" => $id_redir,
       "url" => $request->url
     ]);
 

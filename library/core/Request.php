@@ -12,7 +12,7 @@ class Request {
 
     $this->$head = $header;
 
-    if ($header["Content-Type"] ==  "application/json") {
+    if (@$header["Content-Type"] ==  "application/json") {
 
       $datas = json_decode( file_get_contents('php://input'), true );
 
